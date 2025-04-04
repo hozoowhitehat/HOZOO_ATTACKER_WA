@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Bot Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Telegram Bot Control</h1>
+        <button class="button" onclick="sendBanMessage()">Send /BAN Message</button>
+        <button class="button" onclick="sendVideo()">Send Video URL</button>
+        <div>
+            <label for="nomor">Nomor Pengguna:</label>
+            <input type="text" id="nomor" placeholder="+62">
+            <button class="button" onclick="sendEmail()">Send Email</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendBanMessage() {
+            const message = `
+𝗛𝗶 👋 LORDHOZOO
+┏━━ıllıllı◌BANNED WHATS APP ◌ıllıllı━━╼
+┃⚛ 𝐁𝐨𝐭 𝐍𝐚𝐦𝐞: BANNED WHAST APP ATTACKER
+┃⚛ 𝐎𝐖𝐍𝐄𝐑 𝐍𝐀𝐌𝐄: @LORDHOZOO
+┃⚛ 𝐑𝐀𝐌 : 8GB / 8 GB
+┃⚛ 𝐃𝐀𝐓𝐄 : ${new Date().toLocaleString()}
+┗━━━━━━━━━━━━━━━
+
+╔══ 𖤍ATTACKER WHTASAPP LORDHOZOO 𖤍 ══▢
+║ /BAN
+╚══════༆
+`;
+            await fetch('/send-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            });
+            alert('Message sent');
+        }
+
+        async function sendVideo() {
+            await fetch('/send-video', {
+                method: 'POST'
+            });
+            alert('Video URL sent');
+        }
+
+        async function sendEmail() {
+            const nomor = document.getElementById('nomor').value;
+            await fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nomor })
+            });
+            alert('Email sent');
+        }
+    </script>
+</body>
+</html>
